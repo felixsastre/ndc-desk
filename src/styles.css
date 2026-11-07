@@ -1,0 +1,286 @@
+/*
+ * A plain terminal look: near-black background, light grey text, one green accent.
+ * Change colors and the font here, nowhere else.
+ */
+:root {
+  --bg: #0c0c0c;
+  --bg-raised: #161616;
+  --border: #2a2a2a;
+  --text: #cccccc;
+  --text-strong: #f2f2f2;
+  --muted: #7f7f7f;
+  --accent: #5fd787;
+  --secondary: #5fafd7;
+  --amber: #d7ba7d;
+  --error: #f14c4c;
+  --selection: #264f78;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  background: var(--bg);
+}
+
+::selection {
+  background: var(--selection);
+}
+
+.window {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Title bar: only a place to drag the window and show its name. */
+.titlebar {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.titlebar__title {
+  color: var(--muted);
+}
+
+/* Fake window buttons, only when previewing outside the desktop app. */
+body.is-browser .titlebar::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f57;
+  box-shadow:
+    20px 0 #febc2e,
+    40px 0 #28c840;
+}
+
+/* Output */
+.output {
+  flex: 1;
+  padding: 4px 20px 12px;
+  overflow-y: auto;
+}
+
+.output::-webkit-scrollbar {
+  width: 10px;
+}
+
+.output::-webkit-scrollbar-thumb {
+  border: 3px solid var(--bg);
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.line,
+.welcome,
+.help,
+.offers,
+.detail {
+  margin: 0 0 12px;
+}
+
+.line {
+  margin-bottom: 4px;
+  white-space: pre-wrap;
+}
+
+.line--echo {
+  margin-top: 12px;
+  color: var(--text-strong);
+}
+
+.line--muted {
+  color: var(--muted);
+}
+
+.line--error {
+  color: var(--error);
+}
+
+.line--success {
+  color: var(--accent);
+}
+
+.line__prompt {
+  margin-right: 10px;
+  color: var(--accent);
+}
+
+/* Welcome banner */
+.welcome p {
+  margin: 0;
+}
+
+.welcome__title {
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.welcome__meta,
+.welcome__hint {
+  color: var(--muted);
+}
+
+/* Help */
+.help {
+  display: grid;
+  gap: 2px;
+}
+
+.help__row {
+  display: grid;
+  grid-template-columns: minmax(220px, max-content) 1fr;
+  gap: 18px;
+}
+
+.help__usage {
+  color: var(--accent);
+}
+
+.help__description {
+  color: var(--muted);
+}
+
+/* Offers table: aligned text columns, a rule under the header, nothing else. */
+.offers__row {
+  display: grid;
+  grid-template-columns: 2.4rem 1.1fr 3rem 1.1fr 1.5fr 0.9fr 0.8fr 1fr;
+  gap: 12px;
+  padding: 1px 8px;
+}
+
+.offers__row:not(.offers__row--head):hover {
+  background: var(--bg-raised);
+}
+
+.offers__row--head {
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.offers__row > :first-child {
+  color: var(--secondary);
+}
+
+.offers__row:not(.offers__row--head) > :last-child {
+  color: var(--amber);
+  text-align: right;
+}
+
+.offers__row--head > :last-child {
+  text-align: right;
+}
+
+/* Offer detail: key and value pairs between two thin rules. */
+.detail {
+  padding: 6px 8px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.detail__row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+}
+
+.detail__label {
+  color: var(--muted);
+}
+
+/* Prompt */
+.footer {
+  flex-shrink: 0;
+  padding: 8px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prompt__symbol {
+  color: var(--accent);
+}
+
+.prompt__field {
+  position: relative;
+  flex: 1;
+}
+
+.prompt__ghost,
+.prompt__input {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  white-space: pre;
+}
+
+.prompt__ghost {
+  position: absolute;
+  inset: 0;
+  color: var(--muted);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.ghost__typed {
+  visibility: hidden;
+}
+
+.prompt__input {
+  position: relative;
+  color: var(--text-strong);
+  border: 0;
+  outline: 0;
+  background: transparent;
+  caret-color: var(--accent);
+}
+
+/* Status bar, like the one at the bottom of tmux or vim. */
+.statusbar {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 2px 20px;
+  color: var(--muted);
+  font-size: 12px;
+  background: var(--bg-raised);
+}
+
+.statusbar__left {
+  display: flex;
+  gap: 14px;
+}
+
+.statusbar__dialect {
+  color: var(--accent);
+  font-weight: 700;
+}

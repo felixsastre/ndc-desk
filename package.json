@@ -1,0 +1,15 @@
+{
+  "name": "ndc-desk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A desktop flight search and booking terminal",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

@@ -1,0 +1,11 @@
+node_modules/
+src-tauri/target/
+src-tauri/gen/
+.env
+.DS_Store
+
+# Notes for the AI assistant, kept local.
+CLAUDE.md
+
+# Kept for the authors only, never published.
+private/

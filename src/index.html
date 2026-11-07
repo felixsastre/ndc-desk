@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ndc-desk</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="window">
+      <header class="titlebar" data-tauri-drag-region>
+        <span class="titlebar__title" data-tauri-drag-region>ndc-desk</span>
+      </header>
+
+      <main id="output" class="output" aria-live="polite"></main>
+
+      <footer class="footer">
+        <label class="prompt">
+          <span class="prompt__symbol">$</span>
+          <span class="prompt__field">
+            <span id="ghost" class="prompt__ghost" aria-hidden="true"></span>
+            <input
+              id="input"
+              class="prompt__input"
+              type="text"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off"
+              autofocus
+            />
+          </span>
+        </label>
+      </footer>
+
+      <div class="statusbar">
+        <span class="statusbar__left">
+          <span id="dialect-badge" class="statusbar__dialect"></span>
+          <span>test mode</span>
+        </span>
+        <span class="statusbar__hints">↑↓ history · tab complete · ^L clear · esc reset</span>
+      </div>
+    </div>
+  </body>
+</html>
