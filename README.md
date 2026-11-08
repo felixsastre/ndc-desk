@@ -4,11 +4,12 @@ A desktop terminal for searching flights. You type short entries, like the ones 
 
 It is a Tauri v2 app (Rust core) with a plain HTML, CSS and JavaScript interface. Today it shows generated demo offers; it does not connect to any airline or booking service.
 
-## About this project
-
-This is an experiment, made for research and out of curiosity about how airline distribution works. It is not prepared for production use, and it should not be used with real bookings, fares or traffic.
-
-The project is unofficial and is not affiliated with Duffel or any airline.
+> [!IMPORTANT]
+> This is a proof of concept, made for research and out of curiosity about how airline
+> distribution works. It is not prepared for production use, and it should not be used
+> with real bookings, fares or traffic.
+>
+> The project is unofficial and is not affiliated with Duffel or any airline.
 
 ## Words used here
 
